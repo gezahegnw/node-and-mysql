@@ -16,15 +16,6 @@ var connection = mysql.createConnection({
   database: "bamazon"
 });
 
-/*connection.connect(function(err) {
-  if (err) throw err;
-  showMeAllPoduct();
-});
-
-*/
-//=====================================================================
-// Show ids, names, and prices of products
-
   
 connection.connect(function(err) {
   if (err) {
@@ -34,7 +25,7 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-// Show ids, names, and prices of products
+//this will  Shows the products ids, products names, and products prices of products department
 connection.query('SELECT * FROM `products`', function (err, results, fields) {
   if (err) {
     console.log(err);
@@ -58,16 +49,16 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
     }]).then(function(answer) {
       for (var i=0; i<results.length; i++) {
         if (results[i].item_id === parseInt(answer.itemId)) {
-          // If order quantity is too high, notify user of insufficient stock
+          // If order quantity is too high,then notify user of insufficient stock
           if (results[i].stock_quantity < parseInt(answer.quantity)) {
             console.log(chalk.red("Insufficient stock!"));
             saleItems();
           } else {
-            // Calculate order total and remaining stock
+            // this will calculate order total and remaining stock
             var total = parseFloat(answer.quantity*results[i].price).toFixed(2);
             var newStock = results[i].stock_quantity - answer.quantity;
 
-            // Construct query to update stock
+            // this query will update the stock
             var updateStock = 'UPDATE `products` SET `stock_quantity` = ' + newStock + ' WHERE `item_id` = ' + answer.itemId
             connection.query(updateStock, function(err, result) {
               if (err) {
@@ -78,10 +69,9 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
               }
             });
 
-            // Notify user of successful purchase
+            //this will notify user of successful purchase
             console.log("You have purchased " + answer.quantity + " " + results[i].product_name);
             console.log("Your order total is " + total);
-          //  keepShopping();
           }
         }
       }
@@ -107,7 +97,6 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
      
     });
   };
-  //saleItems();
 });
 
     
