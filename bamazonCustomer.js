@@ -31,10 +31,10 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
     console.log(err);
   }
   for (var i=0; i<results.length; i++) {
-    console.log(chalk.green("Item_Id: ") + results[i].item_id + " " + chalk.blue("Porduct_Name: ") +
-    results[i].product_name + " " + chalk.green("Department: ") +
-    results[i].department_name + " [" + chalk.yellow("Price: ") +
-    results[i].price.toString() + "]" + " " + chalk.red("Quantity: ") +
+    console.log(chalk.greenBright("Item_Id: ") + results[i].item_id + " " + chalk.blueBright("Porduct_Name: ") +
+    results[i].product_name + " " + chalk.greenBright("Department: ") +
+    results[i].department_name + " [" + chalk.yellowBright("Price: ") +
+    results[i].price.toString() + "]" + " " + chalk.redBright("Quantity: ") +
     results[i].stock_quantity.toString());  }
   // Prompt user to select a product and enter desired quantity
   function saleItems() {
@@ -51,7 +51,7 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
         if (results[i].item_id === parseInt(answer.itemId)) {
           // If order quantity is too high,then notify user of insufficient stock
           if (results[i].stock_quantity < parseInt(answer.quantity)) {
-            console.log(chalk.red("Insufficient stock!"));
+            console.log(chalk.redBright("Insufficient stock!"));
             saleItems();
           } else {
             // this will calculate order total and remaining stock
@@ -64,14 +64,14 @@ connection.query('SELECT * FROM `products`', function (err, results, fields) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(chalk.blue(result.affectedRows + " product updated"));
+                console.log(chalk.blueBright(result.affectedRows + " product updated"));
                 keepShopping();
               }
             });
 
             //this will notify user of successful purchase
-            console.log("You have purchased " + answer.quantity + " " + results[i].product_name);
-            console.log("Your order total is " + total);
+            console.log(chalk.yellowBright("You have purchased ") + chalk.greenBright(answer.quantity + " " + results[i].product_name));
+            console.log(chalk.magenta("Your order total is ") +chalk.cyanBright(total));
           }
         }
       }
