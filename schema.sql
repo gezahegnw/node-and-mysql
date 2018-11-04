@@ -1,6 +1,7 @@
-CREATE DATABASE Bamazon;
+DROP DATABASE IF EXISTS bamazon;
+CREATE DATABASE bamazon;
 
-USE Bamazon;
+USE bamazon;
 
 CREATE TABLE products(
   item_id INT NOT NULL AUTO_INCREMENT,
@@ -12,15 +13,8 @@ CREATE TABLE products(
   PRIMARY KEY (item_id)
 );
 
-CREATE TABLE departments(
-  department_id INTNOT NULL AUTO_INCREMENT,
-  department_name VARCHAR(100) NOT NULL,
-  overhead_costs DECIMAL(10,4) DEFAULT 0.00,
-  total_sales DECIMAL(10,4) DEFAULT 0.00,
-  PRIMARY KEY (department_id)
-);
 INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES 
-	("Fire TV Stick with Alexa Voice Remote", "Electronics", 39.99, 50), 
+	  ("Fire TV Stick with Alexa Voice Remote", "Electronics", 39.99, 50), 
     ("Red Dead Redemption 2-Xbox One", "Video Games", 59.96, 100), 
     ("The Wonky Donkey", "Books", 7.13, 300),
     ("Vrem Countertop ice Maker", "Appliances", 134.99, 40), 
@@ -29,10 +23,9 @@ INSERT INTO products (product_name, department_name, price, stock_quantity) VALU
     ("Yootech Wireless Charger Qi-Certified 7.5W", "Cell Phones and Accessories", 14.99, 450),
     ("Microsoft Surface Dock (PD9-00003)", "Computers and Accessories", 125.99, 54),
     ("AmazonBasics Stainless Steel Electric Kettle - 1-Liter", "Home and Kitchen", 17.70, 80),
-    ("Ring Video Doorbell 2", 199.00, 70);
+    ("Ring Video Doorbell 2", "Smart Home", 199.00, 70);
     
   SELECT * FROM products;
     
-	UPDATE products SET stock_quantity = stock_quantity + 10 WHERE item_id = 1;   
     
     
